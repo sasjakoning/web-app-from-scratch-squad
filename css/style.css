@@ -3,7 +3,14 @@
 	--background: hsl(0, 0%, 0%);
 	--primary: hsl(0, 0%, 100%);
 }
+@font-face {
+    font-family: 'w95faregular';
+    src: url('w95fa-webfont.woff2') format('woff2'),
+         url('w95fa-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 
+}
 
 html, * {
 	padding: 0;
