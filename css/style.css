@@ -16,7 +16,7 @@ html{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-
 
 @font-face {
     font-family: 'w95faregular';
-    src: url('w95fa-webfont.woff2') format('woff2'), url('w95fa-webfont.woff') format('woff');
+    src: url('../font/w95fa-webfont.woff2') format('woff2'), url('../font/w95fa-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -33,13 +33,29 @@ html{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-
 
     --grey-header: hsl(0, 0%, 50%);
     --grey-header-text: hsl(0, 0%, 79%);
+    --Light-green:hsl(134, 74%, 52%);
+    --green:hsl(109, 100%, 44%);
+    --dark-green:hsl(120, 100%, 25%);
+    --light-blue:hsl(198, 100%, 58%);
+    --blue:hwb(243 12% 0%);
+    --dark-blue:hsl(240, 100%, 25%);
+    --red:hsl(0, 100%, 50%);
+    --dark-red:hsl(0, 100%, 33%);
+    --yellow: hsl(60, 100%, 50%);
+    --pink:hsl(300, 100%, 50%);
+    --purple:hsl(300, 100%, 25%);
 
     --text-color: hsl(210, 11%, 15%);
+    --text-color-alt: hsl(0, 0%, 100%);
 
-	--background: hsl(0, 0%, 0%);
-	--primary: hsl(0, 0%, 100%);
+    --white: #FFF;
 
-    --default-font: 'w95faregular', monospace;
+    --white-border-settings: 2px solid hsl(0, 0%, 100%);
+    --grey-border-seetings: 2px solid hsl(0, 0%, 52%);
+    --black-border-settings: 2px solid hsl(240, 27%, 4%);
+   
+    --default-font: monospace;
+    --background-color: hsl(231, 21%, 13%);
 }
 
 /*=============================================
@@ -63,79 +79,272 @@ html {
 }
 
 body {
+
+    background-size: 3rem 3rem;
+    background-position: 95%;
+    background-image:
+      linear-gradient(to right, #2e2f3e 1px, transparent 1px),
+      linear-gradient(to bottom, #2e2f3e 1px, transparent 1px);
+  
     position: relative;
 
     min-height: 100vh;
     min-height: -webkit-fill-available;
+    width: 100vw;
+
+    overflow: hidden;
 
     font-family: var(--default-font);
-    font-size: var(--mobile-font-size-px);
-    font-size: var(--mobile-font-size-rem);
+    font-size: 1rem;
     color: var(--text-color);
-    line-height: 1.6;
+    line-height: 1.5;
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
     background-color: var(--background-color);
 }
+/*=============================================
+  #UTILS
+=============================================*/
 
-main {
-    background: rgb(8, 160, 112);
+img {
     width: 100%;
-    min-height: 100vh;
 }
 
+/*=============================================
+  #HEADINGS
+=============================================*/
+h2 {
+    font-size: 18px;
+}
 
-main > ul {
+/*=============================================
+  #MAIN
+=============================================*/
+main {
     display: flex;
-    flex-direction: column;
+    position: relative;
+    container: desktop / inline-size;
+
+    padding: 30px 20px;
+    
+    width: 100%;
+    min-height: 100vh;
+    
+    color: var(--text-color-alt);
+}
+
+/*=============================================
+  #LISTS
+=============================================*/
+.generic-list {
+    display: flex;
     gap: 1rem;
 }
 
-main > ul > li {
-    display: flex;
+.generic-list--column {
     flex-direction: column;
-    width: 6rem;
-    aspect-ratio: 1/1;
 }
 
+
+    .generic-list li {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 6rem;
+
+        font-size: .6rem;
+        font-weight: 300;
+        line-height: 2;
+    }
+
+        .generic-list li a {
+            text-decoration: none;
+        }
+
+        .generic-list li img {
+            width: 50%;
+        }
+
+/*=============================================
+  #WINDOW
+=============================================*/
 .window {
-    display: none;
+    /* display: none; */
+    position: absolute;
+    background-color: var(--white);
+    width: 90%;
+    height: 80%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    
+    border: 2px solid var(--text-color);
+    border-radius: 8px;
+    color: var(--text-color);
+    box-shadow: 6px 6px 0 var(--grey-primary), 8px 8px 0 var(--text-color);
 }
 
 
+    .window__header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+
+        height: 5rem;
+
+        border-top-left-radius: 8px; 
+        border-top-right-radius: 8px;
+        background-color: var(--white);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+        .window__header > nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .5rem;
+            border-bottom: 2px solid var(--text-color);
+        }
+
+            .window__header > nav button {
+                width: 1rem;
+                aspect-ratio: 1/1;
+                border: 2px solid var(--text-color);
+            }
+
+            .window__header > nav button:nth-of-type(1) {
+                background: var(--green);
+            }
+
+            .window__header > nav button:nth-of-type(2) {
+                background: var(--yellow);
+            }
+
+            .window__header > nav button:nth-of-type(3) {
+                background: var(--red);
+            }
+
+        .window__header > ul {
+            display: flex;
+            gap: 1rem;
+            border-bottom: 2px solid var(--text-color);
+        }
 
 
+    .window__body {
+        overflow-y: scroll;
+        height: 100%;
+        display: block;
 
+    }
+        .window__content {
+            overflow-y: scroll;
 
+            /* height top */
+            padding: 5rem 0 40px 0;
+        }
 
+.window__content ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+    gap: 1rem;
+    padding: 1rem;
 
+    height: 100%;
+    place-content: start;
 
+    max-width: 50rem;
+}
 
+    .window__content ul li {
+        max-width: 4.8rem;
+    }
 
+    .window__content ul > li img {
+        width: 100%;
+    } 
+    
 
+.window > footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
+    padding: 4px 8px;
+
+    background-color: pink;
+
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/*=============================================
+  #BUTTONS
+=============================================*/
+button {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
+.btn {
+    padding: 4px 10px;
+
+    min-width: 75px;
+    font-weight: 700;
+}
+/*=============================================
+  #FOOTER
+=============================================*/
 .taskbar {
     position: fixed;
+
+    left: 50%;
     bottom: 0;
-    left: 0;
+    width: auto;
 
-    width: 100%;
-    height: 3rem;
+    height: 50px;
 
-    background: var(--grey-primary);
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: 2px solid white;
+    
     z-index: 100;
+    background-color: #aeafc0;
 }
 
-.taskbar > nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    .taskbar > nav {
+        display: block;
+        width: 100%;
+        
+        padding: 0 12px;
+    }
 
-.taskbar > nav > div {
-    display: flex;
-    align-items: center;
-}
+        .menu {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 6px;
+        }
